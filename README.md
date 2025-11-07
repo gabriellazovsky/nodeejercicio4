@@ -1,12 +1,5 @@
 # nodeejercicio4
 
-<<<<<<< HEAD
-- Web Scraping Periódico con hora en Node.js (index.js)
-- Web Scraping Estático con citas en Node.js (citas.js)
-=======
-- Web Scraping Periódico con Node.js (index.js)
-- Web Scraping Estático con Node.js (citas.js)
->>>>>>> 21b36fe (hecho con server)
 
 # 🌐 Web Scraping con Node.js — Ejemplos Prácticos
 
