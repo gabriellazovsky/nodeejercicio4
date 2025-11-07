@@ -34,8 +34,8 @@ async function extraerDatos() {
     }
 }
 
-// ⏱ Ejecutar scraping cada 60 segundos
-setInterval(extraerDatos, 60000);
+// ⏱ Ejecutar scraping cada x segundos
+setInterval(extraerDatos, 30000);
 
 // ⚙️ Ejecutar al inicio
 extraerDatos();
