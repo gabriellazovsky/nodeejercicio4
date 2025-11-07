@@ -36,7 +36,7 @@ Ambos ejemplos demuestran cómo:
  ```bash
 node citas.js
 # o
-node hora.js
+node index.js
 ```
 
 3. Abre en tu navegador:
