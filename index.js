@@ -4,60 +4,32 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 
 const PORT = 3000;
-const URL = 'https://quotes.toscrape.com';
-let ultimaExtraccion = null;
-let citasGuardadas = [];
+const URL = 'https://www.timeanddate.com/worldclock/spain/madrid';
+let ultimaHora = null;
+let historial = [];
 
-// 🕒 Función para hacer scraping
-async function extraerDatos() {
+// 🕒 Función de scraping
+async function extraerHora() {
     try {
-        const response = await axios.get(URL);
-        const html = response.data;
-        const $ = cheerio.load(html);
+        const { data } = await axios.get(URL);
+        const $ = cheerio.load(data);
 
-        let citas = [];
-        $('.quote').each((i, elem) => {
-            const texto = $(elem).find('.text').text().trim();
-            const autor = $(elem).find('.author').text().trim();
-            citas.push({ texto, autor });
-        });
+        // Selector donde aparece la hora en esa página
+        const hora = $('#ct').text().trim();
 
-        citasGuardadas = citas;
-        ultimaExtraccion = new Date().toLocaleString();
+        if (hora && hora !== ultimaHora) {
+            ultimaHora = hora;
+            historial.push({ hora, fecha: new Date().toLocaleString() });
 
-        // Guardar en archivo local
-        fs.writeFileSync('data.json', JSON.stringify(citas, null, 2));
-        console.log(`[${ultimaExtraccion}] Datos extraídos correctamente (${citas.length} citas).`);
-
+            // Guarda histórico
+            fs.writeFileSync('horas.json', JSON.stringify(historial, null, 2));
+            console.log(`Nueva hora detectada: ${hora}`);
+        }
     } catch (err) {
-        console.error('Error al extraer datos:', err.message);
+        console.error('Error al extraer la hora:', err.message);
     }
 }
 
-// ⏱ Ejecutar scraping cada 60 segundos
-setInterval(extraerDatos, 60000);
+// 🔁 Ejecutar cada 30 segundos
+setInterval(extraerHora, 30000);
 
-// ⚙️ Ejecutar al inicio
-extraerDatos();
-
-// 🌐 Crear servidor HTTP
-const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.write('<h1>Servidor de Web Scraping</h1>');
-
-    if (!ultimaExtraccion) {
-        res.end('<p>Los datos aún no están disponibles. Espera unos segundos...</p>');
-        return;
-    }
-
-    res.write(`<p>Última extracción: ${ultimaExtraccion}</p>`);
-    res.write('<ul>');
-    citasGuardadas.slice(0, 5).forEach(cita => {
-        res.write(`<li><b>${cita.autor}</b>: "${cita.texto}"</li>`);
-    });
-    res.end('</ul>');
-});
-
-server.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
-});
