@@ -1,7 +1,7 @@
 # nodeejercicio4
 
 
-# 🌐 Web Scraping con Node.js — Ejemplos Prácticos
+# Web Scraping con Node.js — Ejemplos Prácticos
 
 Este proyecto contiene **dos ejercicios completos de Web Scraping con Node.js**:
 
