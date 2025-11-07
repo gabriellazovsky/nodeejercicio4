@@ -1,82 +1,46 @@
 # nodeejercicio4
 
-- Web Scraping Periódico con Node.js (index.js)
-- Web Scraping Estático con Node.js (static.js)
+- Web Scraping Periódico con hora en Node.js (index.js)
+- Web Scraping Estático con citas en Node.js (citas.js)
 
+# 🌐 Web Scraping con Node.js — Ejemplos Prácticos
 
-##  Web Scraping Periódico con Node.js
+Este proyecto contiene **dos ejercicios completos de Web Scraping con Node.js**:
 
-Este proyecto realiza **web scraping automático** sobre una página web que cambia con el tiempo, extrayendo información específica de forma periódica para analizar su evolución.
+1.  **Extracción de citas** desde [Quotes to Scrape](https://quotes.toscrape.com)  
+2.  **Extracción de la hora actual** desde [Time and Date](https://www.timeanddate.com/worldclock/spain/madrid)
+
+Ambos ejemplos demuestran cómo:
+- Descargar el HTML de una web.
+- Procesarlo para extraer información específica.
+- Guardar los datos en archivos locales.
+- Servir los resultados mediante un servidor HTTP.
 
 ---
 
-###  Objetivo
-
-- Descargar el HTML de una web de manera automática.  
-- Procesar el contenido para **extraer datos específicos**.  
-- Repetir el proceso periódicamente para **detectar cambios o guardar histórico**.  
-- Usar **Cheerio** para manipular el DOM como si fuera jQuery.  
-
----
-
-### Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - **Node.js**  
-- **Axios** – para realizar peticiones HTTP  
-- **Cheerio** – para procesar y analizar el HTML  
-- **fs** (File System) – para guardar los datos extraídos en un archivo JSON  
+- **Axios** → para hacer peticiones HTTP.  
+- **Cheerio** → para analizar y manipular el DOM.  
+- **fs (File System)** → para guardar los datos en archivos.  
+- **http** → para crear el servidor web local.  
 
 ---
 
-###  Instalación y ejecución
+##  Instalación
 
-1. Clona o copia este proyecto.  
-2. Inicializa Node y las dependencias necesarias:
-
+1. Inicializa tu proyecto y añade las dependencias:
    ```bash
    npm init -y
    npm install axios cheerio
+2. Ejecuta uno de ellos:
+ ```bash
+node citas.js
+# o
+node hora.js
+```
 
-Funcionamiento
-Se descarga el contenido HTML de la página:
+3. Abre en tu navegador:
+http://localhost:3000
 
-https://www.timeanddate.com/worldclock/spain/madrid
-
-
-##  Web Scraping Estático con Node.js
-
-Este proyecto realiza **web scraping básico** sobre una página web estática, extrayendo información específica del HTML sin necesidad de recargar o ejecutar JavaScript.
-
----
-
-### 📋 Objetivo
-
-- Descargar el HTML de una web.  
-- Procesar el contenido para **extraer datos específicos**.  
-- Mostrar la información obtenida en la consola.  
-- Usar **Cheerio** para analizar el DOM.  
-
----
-
-### ⚙️ Tecnologías utilizadas
-
-- **Node.js**  
-- **Axios** – para realizar peticiones HTTP  
-- **Cheerio** – para procesar y analizar el HTML  
-
----
-
-### 🚀 Instalación y ejecución
-
-1. Clona o copia este proyecto.  
-2. Inicializa Node y las dependencias necesarias:
-
-   ```bash
-   npm init -y
-   npm install axios cheerio
-
-
-
-Se procesa con Cheerio para extraer el elemento que contiene la hora actual (#ct).
-Cada 30 segundos, el script repite la extracción.
-Si la hora ha cambiado, se almacena el nuevo valor junto con la fecha y hora local en un archivo horas.json. Y se observa en la terminal
